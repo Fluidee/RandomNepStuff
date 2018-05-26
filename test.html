@@ -5,24 +5,44 @@
 	<script>
 	var phones = 0;
 	var water = 0;
+	var energyRate = 0;
 	var energy = 0;
+	
 	$(document).ready(function(){
 		$("#putWater").click(function(){
 			water += 1;
-			energy = phones * (water*3);
-			$("#energyGen").html(energy);
-			$("#waterBowls").html(water);
+			energyRate = phones * (water*3);
 			$("#bowl").css({"display":"block","position":"relative","left":"200px","bottom":"100px"});
+			updateDisplay();
 		});
 		$("#stealPhone").click(function(){
 			phones += 1;
-			energy = phones * (1+water*3);
-			$("#energyGen").html(energy);
-			$("#stolenPhones").html(phones);
+			energyRate = phones * (1+water*3);
 			$("#phone").css({"display":"block","position":"relative","left":"200px","bottom":"150px"});
-			$("img#wheel").css({"animation-name":"wheelRun","animation-duration":"2.5s","animation-iteration-count":"infinite","animation-timing-function":"linear"});
+			updateDisplay();
 		});	
+		setInterval(updateLogic, 1000);
 	});
+	
+	function updateLogic()
+	{
+		energy += energyRate;
+		updateDisplay();
+	};
+	
+	function updateDisplay()
+	{
+		$("#energyGen").html(energyRate);
+		$("#waterBowls").html(water);
+		$("#energyTotal").html(energy);
+		
+		$("#stolenPhones").html(phones);
+		if(phones > 0)
+		{
+			$("img#wheel").css({"animation-name":"wheelRun","animation-duration":"2.5s","animation-iteration-count":"infinite","animation-timing-function":"linear"});
+		}
+	};
+	
 	</script>
 	<style>
 	@keyframes wheelRun {
@@ -50,6 +70,7 @@
 	<div>Phones stolen so far:</div><div id='stolenPhones'>0</div><br>
 	<div>Bowls of water:</div><div id='waterBowls'>0</div><br>
 	<div>Energy(Credits)/sec:</div><div id='energyGen'>0</div><br>
+	<div>Total energy(Credits) generated:</div><div id='energyTotal'>0</div><br>
 	<p>
 		<button id='putWater'>Put water under phone(s)</button>
 		<button id='stealPhone'>Steal a phone</button>
