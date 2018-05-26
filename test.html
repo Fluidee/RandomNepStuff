@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+	var phones = 0;
+	var water = 0;
+	var energy = 0;
+	$(document).ready(function(){
+		$("#putWater").click(function(){
+			water += 1;
+			energy = phones * (water*3);
+			$("#energyGen").html(energy);
+			$("#waterBowls").html(water);
+			$("#bowl").css({"display":"block","position":"relative","left":"200px","bottom":"100px"});
+		});
+		$("#stealPhone").click(function(){
+			phones += 1;
+			energy = phones * (1+water*3);
+			$("#energyGen").html(energy);
+			$("#stolenPhones").html(phones);
+			$("#phone").css({"display":"block","position":"relative","left":"200px","bottom":"150px"});
+			$("img#wheel").css({"animation-name":"wheelRun","animation-duration":"2.5s","animation-iteration-count":"infinite","animation-timing-function":"linear"});
+		});	
+	});
+	</script>
+	<style>
+	@keyframes wheelRun {
+    0% {transform: rotate(0deg)}
+	50% {transform: rotate(180deg)}
+    100% {transform:rotate(360deg);}
+	}
+	img#if {
+		position: relative;
+		right: 110px;
+		bottom: 10px;
+	}
+	img#phone {
+		position: absolute;
+		display: none;
+	}
+	img#bowl {
+		position: relative;
+		bottom: 10px;
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<div>Phones stolen so far:</div><div id='stolenPhones'>0</div><br>
+	<div>Bowls of water:</div><div id='waterBowls'>0</div><br>
+	<div>Energy(Credits)/sec:</div><div id='energyGen'>0</div><br>
+	<p>
+		<button id='putWater'>Put water under phone(s)</button>
+		<button id='stealPhone'>Steal a phone</button>
+	</p>
+	<p>
+		<img id='wheel' src="https://github.com/Tratatata222/RandomShit/raw/master/stupidshit1.png" alt="123">
+		<img id='if' src="https://github.com/Tratatata222/RandomShit/raw/master/stupidshit2.png" alt="123">
+		<p>
+			<img id='phone' src="https://github.com/Tratatata222/RandomShit/raw/master/stupidshit3.png">
+			<img id='bowl' src="https://github.com/Tratatata222/RandomShit/raw/master/stupidshit4.png">
+		</p>
+	</p>
+</body>
+</html>
